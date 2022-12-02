@@ -36,7 +36,11 @@
     
     /*Product Section Style*/
     .offers-section .product-frame{padding:var(--el-normal);}
-
+    
+    /*Review Section Style*/
+    .review-section .review-frame{padding:var(--el-normal);}
+    .review-section .review-item{padding:var(--el-medium);}
+    .review-section .review-item p{-webkit-line-clamp: 3;}
 }
 
 
@@ -64,6 +68,9 @@
 
   /*Product Section Style*/
   .offers-section .product-frame{width:var(--ls-1-2);}
+
+  /*Review Section Style*/
+  .review-section .review-frame{width:var(--ls-1-2);}
 }
 
 
@@ -88,4 +95,10 @@
 
       /*Product Section Style*/
   .offers-section .product-frame{width:var(--ls-full);}
+
+    /*Review Section Style*/
+    .review-section .review-frame{width:var(--ls-full);}
+
+    /*Gallery Section Style*/
+    .gallery-section .grid-item{width:var(--ls-1-2); padding:0.25rem;}
 }
