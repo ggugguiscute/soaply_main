@@ -35,4 +35,12 @@ $(function () {
   };
 
   $.getJSON("/data/gallery.json", getGalleryData);
+
+  // navigation moving to target section
+  $(".nav-lists li").on("click", function () {
+    const targetIdx = $(this).index();
+    //console.log(targetIdx);
+    const pagePosition = $(".nav-target").eq(targetIdx).offset().top;
+    $("html, body").animate({ scrollTop: pagePosition }, 300);
+  });
 }); //recommended

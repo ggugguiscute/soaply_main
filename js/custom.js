@@ -63,6 +63,16 @@ const getData = async () => {
 
 getData();
 
+/********** Fit Insta Image Height **********/
+const instaImgHeight = document.querySelector("#h").scrollHeight;
+//console.log(instaImgHeight);
+document.querySelector("#fh").style.height = instaImgHeight + "px";
+
+window.addEventListener("resize", () => {
+  const instaImgHeight = document.querySelector("#h").scrollHeight;
+  document.querySelector("#fh").style.height = instaImgHeight + "px";
+});
+
 /********** Scroll Reveal Effect **********/
 const sr = ScrollReveal({
   //생성자는 앞에 반드시 대문자로,,
