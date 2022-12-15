@@ -4,6 +4,9 @@ const idInput = document.querySelector(".id");
 const emailInput = document.querySelector(".email");
 const pwdInput = document.querySelector(".pwd");
 const rpwdInput = document.querySelector(".rpwd");
+// http response code  참조 : https://www.whatap.io/ko/blog/40/
+
+let status;
 
 signup.addEventListener("click", () => {
   // 입력창 작성 체크
@@ -41,9 +44,22 @@ signup.addEventListener("click", () => {
   }
   // 입력창 작성 체크 끝 : 윗 부분이 완료되면 다음 코드로 진행
   // formData 참조 : https://ko.javascript.info/formdata
-  const formData = new FormData(document.querySeletor("form"));
-  fetch("/main_backend/model.php", {
+  const formData = new FormData(document.querySelector("form"));
+  fetch("/main_backend/model/register.php", {
     method: "POST",
     body: formData,
-  });
+  })
+    .then((res) => {
+      console.log(res);
+      status = res.status;
+      return res.json();
+    })
+    .then((resData) => {
+      // console.log(resData);
+      alert(resData.msg);
+      location.href = "/main_project/index.html";
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
