@@ -18,15 +18,15 @@ $(function () {
 // ===> imgFileSelect function
 const imgFileSelect = (event) => {
   const input = event.target; //변화된 입력창 타겟 저장
-  const reader = new FileReader(); //FileReader 기능 저장
+  const reader = new FileReader(); //FileReader 기능 저장 - 서버로 전송되는 파일의 정보를 읽는다.
 
   reader.onload = function () {
-    const dataURL = reader.result;
+    const dataURL = reader.result; //base64로 인코딩된 값
     const output = document.querySelector("#img");
     output.src = dataURL;
     // console.log(dataURL);
   };
-  reader.readAsDataURL(input.files[0]);
+  reader.readAsDataURL(input.files[0]); //파일 입력이 저장된 객체의 files 배열에 FileReader 기능 실행
 };
 
 //tabs code
