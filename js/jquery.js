@@ -18,8 +18,16 @@ $(function () {
     $.each(data, function (i, item) {
       // console.log(i);
       //console.log(item);
-      const galleryItems = `<div class="grid-item">
-        <img src="/main_project/images/${item.datamain}" alt="" />`;
+      const galleryItems = `
+        <div class="grid-item">
+          <a href="/main_project/pages/details.html?idx=${item.pro_idx}">
+            <img src="/main_project/images/products/${item.pro_img}" alt="">
+            <span class="overlay">
+              <em class="common-btn">제품보기</em>
+            </span>
+          </a>
+        </div>
+    `;
 
       items.push($(galleryItems).get(0));
     });
@@ -34,7 +42,7 @@ $(function () {
     });
   };
 
-  $.getJSON("/main_project/data/gallery.json", getGalleryData);
+  $.getJSON("/main_backend/model/get_products.php?qnt=9", getGalleryData);
 
   // navigation moving to target section
   $(".nav-lists li").on("click", function () {
