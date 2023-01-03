@@ -49,3 +49,8 @@ em, strong{font-style:normal; font-weight:var(--fw-400);}
 .details .comment-lists p{font-size:var(--fs-14); color:var(--color-gray-5);}
 
 .no-list{width:100%; height:auto; text-align: center; font-size:var(--fs-14); padding:var(--el-medium) 0;}
+
+/* Modifying comment Style*/
+.update-form{width:100%; height:auto; display:flex; justify-content: space-between;}
+.update-form input{width:85%; height:auto; padding:var(--el-normal); border:1px solid var(--color-gray-d); border-radius: 0.25rem;}
+.update-form button{width:calc(15% - 0.25rem); background: var(--color-black); color:#fff;}
