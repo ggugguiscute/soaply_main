@@ -13,7 +13,7 @@ window.addEventListener("load", function () {
       console.log(data.userid);
       console.log(data.user_idx);
       cart.innerHTML = `
-      <a href="#"><i class="ri-shopping-cart-line"></i><em>(5)</em></a>
+      <a href="/main_project/pages/cart.html"><i class="ri-shopping-cart-line"></i><em>(${data.cart_count})</em></a>
       `;
       if (data.userid === "guest") {
         adminIcon.forEach((item) => {
