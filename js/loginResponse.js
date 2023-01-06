@@ -12,9 +12,11 @@ window.addEventListener("load", function () {
       console.log(data);
       console.log(data.userid);
       console.log(data.user_idx);
-      cart.innerHTML = `
+
+      const cartItemEl = `
       <a href="/main_project/pages/cart.html"><i class="ri-shopping-cart-line"></i><em>(${data.cart_count})</em></a>
       `;
+
       if (data.userid === "guest") {
         adminIcon.forEach((item) => {
           item.style.display = "none";
@@ -28,6 +30,8 @@ window.addEventListener("load", function () {
         // userIcon.innerHTML = `<a href="/main_project/pages/sign-in.html">
         // <i class="ri-user-3-fill"></i>
         // </a>`;
+
+        cart.innerHTML = cartItemEl;
       } else {
         adminIcon.forEach((item) => {
           item.style.display = "flex";
@@ -37,6 +41,7 @@ window.addEventListener("load", function () {
           item.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
         });
         // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
+        cart.innerHTML = cartItemEl;
       }
 
       const signoutBtn = document.querySelector(".signout a");
