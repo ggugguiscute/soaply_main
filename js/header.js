@@ -14,29 +14,25 @@ window.addEventListener("load", function () {
   //4. 주의할 점은 각 링크가 두 개씩 존재한다는 것
 
   const pgadr = window.location.href;
-  const homeLink = document.querySelectorAll(".home-link");
-  const shopLink = document.querySelectorAll(".shop-link");
-  const galLink = document.querySelectorAll(".gal-link");
+
+  const links = document.querySelectorAll(".home-link, .shop-link, .gal-link");
+  // console.log(links);
+
   // console.log(pgadr.includes("index"));
   if (pgadr.includes("index")) {
-    homeLink.forEach((item) => {
-      item.setAttribute("href", "#");
-    });
-    shopLink.forEach((item) => {
-      item.setAttribute("href", "#");
-    });
-    galLink.forEach((item) => {
+    links.forEach((item) => {
       item.setAttribute("href", "#");
     });
   } else {
-    homeLink.forEach((item) => {
-      item.setAttribute("href", "/main_project/index.html");
-    });
-    shopLink.forEach((item) => {
-      item.setAttribute("href", "/main_project/pages/shop.html");
-    });
-    galLink.forEach((item) => {
-      item.setAttribute("href", "/main_project/pages/gallery.html");
+    links.forEach((item) => {
+      const itemCls = item.getAttribute("class");
+      if (itemCls === "home-link") {
+        item.setAttribute("href", "/main_project/index.html");
+      } else if (itemCls === "shop-link") {
+        item.setAttribute("href", "/main_project/pages/shop.html");
+      } else {
+        item.setAttribute("href", "/main_project/pages/gallery.html");
+      }
     });
   }
 
