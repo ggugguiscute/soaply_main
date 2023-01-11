@@ -9,39 +9,55 @@ window.addEventListener("load", function () {
       return res.json();
     })
     .then((data) => {
-      console.log(data);
-      console.log(data.userid);
-      console.log(data.user_idx);
+      // console.log(data);
+      console.log(data.userid, data.user_idx, data.user_lvl);
+      // console.log(data.user_idx);
+      // console.log(data.user_lvl);
 
       const cartItemEl = `
       <a href="/main_project/pages/cart.html"><i class="ri-shopping-cart-line"></i><em>(${data.cart_count})</em></a>
       `;
 
       if (data.userid === "guest") {
+        //로그인하지 않았을 때(guest 상태일 때)
         adminIcon.forEach((item) => {
           item.style.display = "none";
         });
+        //어드민 가려줌
 
         userIcon.forEach((item) => {
           item.innerHTML = `<a href="/main_project/pages/sign-in.html">
           <i class="ri-user-3-fill"></i>
         </a>`;
-        });
+        }); //사용자 정보 없는 아이콘
         // userIcon.innerHTML = `<a href="/main_project/pages/sign-in.html">
         // <i class="ri-user-3-fill"></i>
         // </a>`;
 
         cart.innerHTML = cartItemEl;
-      } else {
-        adminIcon.forEach((item) => {
-          item.style.display = "flex";
-        });
 
-        userIcon.forEach((item) => {
-          item.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
-        });
-        // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
-        cart.innerHTML = cartItemEl;
+        //카트 숫자 아이콘
+      } else {
+        if (data.user_lvl === 1) {
+          adminIcon.forEach((item) => {
+            item.style.display = "flex";
+          });
+
+          userIcon.forEach((item) => {
+            item.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
+          });
+          // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
+          cart.innerHTML = cartItemEl;
+        } else {
+          adminIcon.forEach((item) => {
+            item.style.display = "none";
+          });
+          userIcon.forEach((item) => {
+            item.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
+          });
+          // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
+          cart.innerHTML = cartItemEl;
+        }
       }
 
       const signoutBtn = document.querySelector(".signout a");

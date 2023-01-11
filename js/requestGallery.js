@@ -9,9 +9,16 @@ $(function () {
   //const gridBox = $(".grid");
 
   //1. 변수 선언
-  let initCount = 3; //초기에 뿌려질 데이터 갯수
+  let initCount = 3; //초기에 뿌려질 데이터 갯수 - 참고(requestProducts.js)
   let addCount = 0; //특정 동작(클릭) 시 추가될 데이터 갯수
   let allData = []; //전체 데이터 요소가 들어갈 초기 공간
+
+  //Masonry Effect
+  $(".grid").masonry({
+    // options
+    itemSelector: ".grid-item",
+    columnWidth: ".grid-sizer",
+  });
 
   //2. 데이터 요청 후 초기 기능함수(initGalData) 실행
   $.getJSON("/main_backend/model/get_products.php?qnt=all", initGalData);
@@ -48,14 +55,9 @@ $(function () {
       items.push($(galleryItems).get(0));
     });
     $(".grid").append(items);
-    // $(".grid").imagesLoaded(function () {
-    //   // Masonry Effect
-    //   $(".grid").masonry({
-    //     // options
-    //     itemSelector: ".grid-item",
-    //     //columnWidth: 200,
-    //   });
-    // });
+    $(".grid").imagesLoaded(function () {
+      $(".grid").masonry("appended", items);
+    });
 
     addCount += slicedData.length;
     // addCount = addCount + slicedData.length
