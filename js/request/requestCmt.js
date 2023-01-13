@@ -33,6 +33,7 @@ cmtBtn.addEventListener("click", () => {
       return res.json();
     })
     .then((resData) => {
+      // console.log(resData);
       alert(resData.msg);
       location.reload();
     })
