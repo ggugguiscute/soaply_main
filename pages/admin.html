@@ -28,10 +28,7 @@
   <body>
     <div class="wrapper admin-wrapper">
       <!-- Header Include -->
-      <div
-        class="header-wrapper"
-        w3-include-html="/main_project/include/header.html"
-      ></div>
+      <div id="header-wrapper" class="header-wrapper" role="header"></div>
 
       <div class="admin-box">
         <div class="container">
@@ -113,15 +110,8 @@
       </div>
 
       <!-- footer Include -->
-      <div
-        class="footer-wrapper"
-        w3-include-html="/main_project/include/footer.html"
-      ></div>
+      <div role="footer" id="footer"></div>
     </div>
-
-    <!-- Include Files -->
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script src="/main_project/js/interface/include.js"></script>
 
     <!-- JQuery Framework -->
     <script
@@ -130,6 +120,8 @@
       crossorigin="anonymous"
     ></script>
 
+    <!-- Include Files -->
+    <script src="/main_project/js/interface/include.js"></script>
     <!-- Access Check -->
     <script src="/main_project/js/etc/acsCode.js"></script>
 

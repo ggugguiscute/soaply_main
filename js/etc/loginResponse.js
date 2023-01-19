@@ -1,94 +1,94 @@
 window.addEventListener("load", function () {
-  const userIcon = document.querySelectorAll(".user");
-  // console.log(userIcon); //2개의 배열 요소
-  const adminIcon = this.document.querySelectorAll(".admin");
-  const cart = document.querySelector(".cart");
+  async function checkSign() {
+    const userIcon = document.querySelectorAll(".user");
+    // console.log(userIcon); //2개의 배열 요소
+    const adminIcon = this.document.querySelectorAll(".admin");
+    const cart = document.querySelector(".cart");
 
-  this.fetch("/main_backend/etc/check_sign.php")
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      // console.log(data);
-      console.log(data.userid, data.user_idx, data.user_lvl);
-      // console.log(data.user_idx);
-      // console.log(data.user_lvl);
+    this.fetch("/main_backend/etc/check_sign.php")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        // console.log(data);
+        console.log(data.userid, data.user_idx, data.user_lvl);
+        // console.log(data.user_idx);
+        // console.log(data.user_lvl);
 
-      const cartItemEl = `
+        const cartItemEl = `
       <a href="/main_project/pages/cart.html"><i class="ri-shopping-cart-line"></i><em>(${data.cart_count})</em></a>
       `;
 
-      if (data.userid === "guest") {
-        //로그인하지 않았을 때(guest 상태일 때)
-        adminIcon.forEach((item) => {
-          item.style.display = "none";
-        });
-        //어드민 가려줌
-
-        userIcon.forEach((item) => {
-          item.innerHTML = `<a href="/main_project/pages/sign-in.html">
-          <i class="ri-user-3-fill"></i>
-        </a>`;
-        }); //사용자 정보 없는 아이콘
-        // userIcon.innerHTML = `<a href="/main_project/pages/sign-in.html">
-        // <i class="ri-user-3-fill"></i>
-        // </a>`;
-
-        cart.innerHTML = cartItemEl;
-
-        //카트 숫자 아이콘
-      } else {
-        if (data.user_lvl === 1) {
-          adminIcon.forEach((item) => {
-            item.style.display = "flex";
-          });
-
-          userIcon.forEach((item) => {
-            item.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
-          });
-          // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
-          cart.innerHTML = cartItemEl;
-        } else {
+        if (data.userid === "guest") {
+          //로그인하지 않았을 때(guest 상태일 때)
           adminIcon.forEach((item) => {
             item.style.display = "none";
           });
+          //어드민 가려줌
+
           userIcon.forEach((item) => {
-            item.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
-          });
-          // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
+            item.innerHTML = `<a href="/main_project/pages/sign-in.html">
+                                <i class="ri-user-3-fill"></i>
+                              </a>`;
+          }); //사용자 정보 없는 아이콘
+          // userIcon.innerHTML = `<a href="/main_project/pages/sign-in.html">
+          // <i class="ri-user-3-fill"></i>
+          // </a>`;
+
+          console.log(cart);
+
           cart.innerHTML = cartItemEl;
-        }
-      }
 
-      const signoutBtn = document.querySelector(".signout a");
-
-      if (signoutBtn) {
-        signoutBtn.addEventListener("click", (e) => {
-          e.preventDefault();
-          this.fetch("/main_backend/model/register.php?q=signout")
-            .then((res) => res.json())
-            .then((data) => {
-              console.log(data);
-              this.alert("로그아웃 되었습니다.");
-              this.location.reload();
-            })
-            .catch((err) => {
-              console.log(err);
+          //카트 숫자 아이콘
+        } else {
+          if (data.user_lvl === 1) {
+            adminIcon.forEach((item) => {
+              item.style.display = "flex";
             });
-        });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
 
-  // const signoutBtn = document.querySelector("#so");
+            userIcon.forEach((item) => {
+              item.innerHTML = `<button class="signout"><span>${data.userid}</span>&nbsp;| <a href="#"> Logout</a></button>`;
+            });
+            // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
+            cart.innerHTML = cartItemEl;
+          } else {
+            adminIcon.forEach((item) => {
+              item.style.display = "none";
+            });
+            userIcon.forEach((item) => {
+              item.innerHTML = `<button class="signout"><span>${data.userid}</span>&nbsp; | <a href="#"> Logout</a></button>`;
+            });
+            // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
+            cart.innerHTML = cartItemEl;
+          }
+        }
 
-  // signoutBtn.addEventListener("click", () => {
-  //   this.fetch("/main_backend/model/register.php?q=signout")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //     });
-  // });
+        const signoutBtn = document.querySelectorAll(".signout a");
+
+        if (signoutBtn) {
+          signoutBtn.forEach((btn) => {
+            btn.addEventListener("click", (e) => {
+              e.preventDefault();
+              this.fetch("/main_backend/model/register.php?q=signout")
+                .then((res) => res.json())
+                .then((data) => {
+                  console.log(data);
+                  this.alert("로그아웃 되었습니다.");
+                  this.location.reload();
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            });
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  this.setTimeout(function () {
+    checkSign();
+  }, 300);
 });
