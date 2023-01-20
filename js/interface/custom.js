@@ -1,6 +1,5 @@
 /********** Fit Insta Image Height **********/
 const instaImgHeight = document.querySelector("#h").scrollHeight;
-//console.log(instaImgHeight);
 document.querySelector("#fh").style.height = instaImgHeight + "px";
 
 window.addEventListener("resize", () => {

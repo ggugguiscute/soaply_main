@@ -4,8 +4,6 @@ const isCheck = document.getElementsByName("cmt_star");
 const url = document.location.href;
 const urlIndex = Number(url.split("=")[1]);
 
-// console.log(urlIndex);
-
 // http response code  참조 : https://www.whatap.io/ko/blog/40/
 
 let status;
@@ -47,12 +45,9 @@ cmtBtn.addEventListener("click", () => {
     }
   )
     .then((res) => {
-      // console.log(res);
-      // status = res.status;
       return res.json();
     })
     .then((resData) => {
-      // console.log(resData);
       alert(resData.msg);
       location.reload();
     })
@@ -90,7 +85,6 @@ const getCmtLists = async () => {
 
       let listsElmt;
       lists.map((list, idx) => {
-        // console.log(list);
         if (list.user_id === "guest") {
           listsElmt = `<div class="comment-lists">
                 <div class="list-info">
@@ -182,9 +176,6 @@ function updateCmt(cmtObjs) {
           this.classList.add("active");
         }
 
-        // console.log(thisIdx);
-
-        // this.classList.toggle("active");
         cmtUpBtns.forEach((bBtn, idx) => {
           const changeInput = cmtUpBtns[idx].parentNode.nextSibling.nextSibling;
           const thisIdx = changeInput.getAttribute("id").split("-")[1];
@@ -232,7 +223,6 @@ function updateCmt(cmtObjs) {
               `.update-form-${thisIdx} input[type="radio"].val-${cmtObjs[thisIdx].rating}`
             );
 
-            // console.log(upRadioNum);
             upRadioNum.checked = true;
 
             const udSubmitBtn = document.querySelector(
@@ -252,14 +242,11 @@ function updateCmt(cmtObjs) {
                 }
               )
                 .then((res) => {
-                  // console.log(res);
-                  // status = res.status;
                   return res.json();
                 })
                 .then((resData) => {
                   alert(resData.msg);
                   location.reload();
-                  // console.log(resData);
                 })
                 .catch((err) => {
                   console.log(err);

@@ -2,14 +2,11 @@
 $(function () {
   $(".upload-hidden").on("change", function () {
     //jquery의 on은 자바스크립트의 addEventListener 역할을 한다.
-    // console.log(changed);
     let filename;
     if (window.FileReader) {
-      //   console.log($(this));
       filename = $(this)[0].files[0].name;
       console.log(filename);
     }
-    // console.log($(this));
     $(this).siblings().val(filename);
   });
   $("#main-image").on("change", imgFileSelect);
@@ -24,7 +21,6 @@ const imgFileSelect = (event) => {
     const dataURL = reader.result; //base64로 인코딩된 값
     const output = document.querySelector("#img");
     output.src = dataURL;
-    // console.log(dataURL);
   };
   reader.readAsDataURL(input.files[0]); //파일 입력이 저장된 객체의 files 배열에 FileReader 기능 실행
 };

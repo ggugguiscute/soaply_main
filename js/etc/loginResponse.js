@@ -3,18 +3,13 @@ window.addEventListener("load", function () {
     const userIcon = document.querySelectorAll(".user");
     // console.log(userIcon); //2개의 배열 요소
     const adminIcon = this.document.querySelectorAll(".admin");
-    const cart = document.querySelector(".cart");
+    const cart = document.querySelectorAll(".cart");
 
     this.fetch("/main_backend/etc/check_sign.php")
       .then((res) => {
         return res.json();
       })
       .then((data) => {
-        // console.log(data);
-        console.log(data.userid, data.user_idx, data.user_lvl);
-        // console.log(data.user_idx);
-        // console.log(data.user_lvl);
-
         const cartItemEl = `
       <a href="/main_project/pages/cart.html"><i class="ri-shopping-cart-line"></i><em>(${data.cart_count})</em></a>
       `;
@@ -31,13 +26,10 @@ window.addEventListener("load", function () {
                                 <i class="ri-user-3-fill"></i>
                               </a>`;
           }); //사용자 정보 없는 아이콘
-          // userIcon.innerHTML = `<a href="/main_project/pages/sign-in.html">
-          // <i class="ri-user-3-fill"></i>
-          // </a>`;
 
-          console.log(cart);
-
-          cart.innerHTML = cartItemEl;
+          cart.forEach((cartEl) => {
+            cartEl.innerHTML = cartItemEl;
+          });
 
           //카트 숫자 아이콘
         } else {
@@ -49,8 +41,10 @@ window.addEventListener("load", function () {
             userIcon.forEach((item) => {
               item.innerHTML = `<button class="signout"><span>${data.userid}</span>&nbsp;| <a href="#"> Logout</a></button>`;
             });
-            // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
-            cart.innerHTML = cartItemEl;
+
+            cart.forEach((cartEl) => {
+              cartEl.innerHTML = cartItemEl;
+            });
           } else {
             adminIcon.forEach((item) => {
               item.style.display = "none";
@@ -58,8 +52,9 @@ window.addEventListener("load", function () {
             userIcon.forEach((item) => {
               item.innerHTML = `<button class="signout"><span>${data.userid}</span>&nbsp; | <a href="#"> Logout</a></button>`;
             });
-            // userIcon.innerHTML = `<button class="signout">${data.userid} | <a href="#"> Logout</a></button>`;
-            cart.innerHTML = cartItemEl;
+            cart.forEach((cartEl) => {
+              cartEl.innerHTML = cartItemEl;
+            });
           }
         }
 
@@ -90,5 +85,5 @@ window.addEventListener("load", function () {
 
   this.setTimeout(function () {
     checkSign();
-  }, 300);
+  }, 500);
 });

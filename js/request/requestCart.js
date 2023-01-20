@@ -11,7 +11,6 @@ const getCartLists = async () => {
       }
 
       cartData.map((list) => {
-        console.log(list);
         cartListEl = `
         <div class="cart-list">
         <div class="cart-frame">
@@ -52,7 +51,6 @@ const getCartLists = async () => {
           )
             .then((res) => res.json())
             .then((del) => {
-              // console.log(del);
               alert(del.msg);
               location.reload();
             })

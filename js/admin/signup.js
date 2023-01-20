@@ -55,7 +55,6 @@ signup.addEventListener("click", () => {
       return res.json();
     })
     .then((resData) => {
-      // console.log(resData);
       alert(resData.msg);
       location.href = "/main_project/index.html";
     })
